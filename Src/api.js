@@ -197,7 +197,10 @@
 			if (typeof (message) === 'function') {
 				return message(params, observable);
 			}
-			return message.replace(/\{0\}/gi, ko.utils.unwrapObservable(params));
+			if (Object.prototype.toString.call(message) == '[object String]') {
+				return message.replace(/\{0\}/gi, ko.utils.unwrapObservable(params));
+			}
+			return message;
 		},
 
 		// addRule:
